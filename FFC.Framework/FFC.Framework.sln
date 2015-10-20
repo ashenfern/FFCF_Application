@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.WebServices", "FFC.Framework.WebServices\FFC.Framework.WebServices.csproj", "{FE4EEC01-6BF1-446C-B5E6-2EEB526DC567}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "FFC.Framework.Database", "FFC.Framework.Database\FFC.Framework.Database.sqlproj", "{D2FC3EDE-070F-4B1F-AC29-CA5F886042B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestData", "TestData\TestData.csproj", "{2FEA1D50-1E3C-439E-9A27-FDE2E220A7FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{21F56C8A-E6D6-45B7-8C9E-FAAD6E1275CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.WebServicesManager", "FFC.Framework.WebServicesManager\FFC.Framework.WebServicesManager.csproj", "{38DF2BE9-A23E-448E-98DD-488984C1F7A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.Data", "FFC.Framework.Data\FFC.Framework.Data.csproj", "{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{631F2381-ACCE-4918-A870-446990E5206D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE4EEC01-6BF1-446C-B5E6-2EEB526DC567}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4EEC01-6BF1-446C-B5E6-2EEB526DC567}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4EEC01-6BF1-446C-B5E6-2EEB526DC567}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4EEC01-6BF1-446C-B5E6-2EEB526DC567}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2FC3EDE-070F-4B1F-AC29-CA5F886042B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2FC3EDE-070F-4B1F-AC29-CA5F886042B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2FC3EDE-070F-4B1F-AC29-CA5F886042B1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D2FC3EDE-070F-4B1F-AC29-CA5F886042B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2FC3EDE-070F-4B1F-AC29-CA5F886042B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2FC3EDE-070F-4B1F-AC29-CA5F886042B1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2FEA1D50-1E3C-439E-9A27-FDE2E220A7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FEA1D50-1E3C-439E-9A27-FDE2E220A7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FEA1D50-1E3C-439E-9A27-FDE2E220A7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FEA1D50-1E3C-439E-9A27-FDE2E220A7FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21F56C8A-E6D6-45B7-8C9E-FAAD6E1275CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21F56C8A-E6D6-45B7-8C9E-FAAD6E1275CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21F56C8A-E6D6-45B7-8C9E-FAAD6E1275CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21F56C8A-E6D6-45B7-8C9E-FAAD6E1275CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38DF2BE9-A23E-448E-98DD-488984C1F7A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38DF2BE9-A23E-448E-98DD-488984C1F7A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38DF2BE9-A23E-448E-98DD-488984C1F7A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38DF2BE9-A23E-448E-98DD-488984C1F7A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
