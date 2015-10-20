@@ -42,9 +42,9 @@ namespace TestConsole
 
             // .NET Framework array to R vector.
             NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99 });
-            
+
             engine.SetSymbol("testTs", testTs);
-            
+
             // Direct parsing from R script.
             //NumericVector group2 = engine.Evaluate("group2 <- c(29.89, 29.93, 29.72, 29.98, 30.02, 29.98)").AsNumeric();
 
@@ -67,7 +67,6 @@ namespace TestConsole
 
         public static void TestMethod2()
         {
-
             FFCEntities db = new FFCEntities();
             var list = db.sp_Forecast_GetProductCountYearDayByProductId(1).ToList();
 
@@ -78,8 +77,9 @@ namespace TestConsole
             REngine engine = REngine.GetInstance();
 
             // .NET Framework array to R vector.
-            //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99 });
-            NumericVector testTs = engine.CreateNumericVector(values);
+            NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
+            //NumericVector testTs = engine.CreateNumericVector(new double[] { 1,2,3,4,5,6});
+            //NumericVector testTs = engine.CreateNumericVector(values);
 
             //DataFrame datafrate = engine.CreateDataFrame(new List<string> { },);
 
@@ -91,7 +91,7 @@ namespace TestConsole
             //auto arima for monthly
             engine.Evaluate("tsValue <- ts(testTs, frequency=1, start=c(2010, 1, 1))");
             engine.Evaluate("library(forecast)");
-            engine.Evaluate("arimaFit <- Ho(tsValue)");
+            engine.Evaluate("arimaFit <- Arima(tsValue)");
             engine.Evaluate("fcast <- forecast(tsValue, h=5)");
 
             var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
@@ -102,8 +102,56 @@ namespace TestConsole
                 Console.WriteLine(item);
             }
 
+            engine.Dispose();
+        }
+
+        public static void Test()
+        {
+            int productId = 1;
+            string method = "HoltWinters"; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
+            int periods = 30;
+
+            FFCEntities db = new FFCEntities();
+            var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
+
+            List<double> values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
+
+            REngine.SetEnvironmentVariables();
+
+            // There are several options to initialize the engine, but by default the following suffice:
+            REngine engine = REngine.GetInstance();
+
+            // .NET Framework array to R vector.
+            //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
+            //NumericVector testTs = engine.CreateNumericVector(new double[] { 6, 5, 6, 5, 6, 5 });
+            NumericVector testTs = engine.CreateNumericVector(values);
+
+            engine.SetSymbol("testTs", testTs);
+
+            //auto arima for monthly
+            engine.Evaluate("tsValue <- ts(testTs, frequency=3, start=c(2010, 1, 1))");
+            engine.Evaluate("library(forecast)");
+            engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method)); // Fit <- Arima(tsValue)
+            engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
+
+            plot(engine);
+
+            //var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
+            NumericVector forecasts = engine.Evaluate("fcast$mean").AsNumeric();
+
+            foreach (var item in forecasts)
+            {
+                Console.WriteLine(item);
+            }
 
             engine.Dispose();
+        }
+
+        public static void plot(REngine engine)
+        {
+            engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Documents\\RFiles\\Images\\Test2.png')");
+            engine.Evaluate("plot(fcast)");
+            engine.Evaluate("dev.off()");
         }
     }
 }
