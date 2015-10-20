@@ -92,5 +92,8 @@
   <ItemGroup>
     <None Include="Snapshots\FFC.Framework.Database_20151006_20-08-26.dacpac" />
     <None Include="Scripts\R\TimeSeries.R" />
+    <None Include="Scripts\R\FFC.R" />
+    <None Include="Scripts\R\ForecastSeminar.R" />
+    <None Include="Scripts\R\PlotSave.R" />
   </ItemGroup>
 </Project>
