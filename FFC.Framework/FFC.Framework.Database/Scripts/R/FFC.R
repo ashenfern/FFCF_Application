@@ -59,3 +59,26 @@ fcast2
 f3
 #summary(f1)
 #?meanf
+
+
+
+#######################################Custom X Axis
+x1<- c(2,4,6,8,10,12)
+plot(x1, xaxt = "n", xlab='Some Letters')
+axis(1, at = 1:6, c("year1", "year2", "year3", "year4", "year5","year6"))
+                    
+                    
+plot(1:10, xaxt = "n", xlab='Some Letters')
+axis(1, at=1:10, c("year1", "year1", "year2", "year1", "year1","year1","year1","year1","year1","year1"))
+
+############################################################# TSAxis
+x<- c(1,2,3,4,5,6,7,8,9,10,11)
+require(lubridate)
+y = ts(x, start=c(2011, yday("2011-11-01")), frequency=365)
+plot(forecast(ets(y), 10), xaxt="n")
+a = seq(as.Date("2011-11-01"), by="weeks", length=11)
+axis(1, at = decimal_date(a), labels = format(a, "%Y %b %d"), cex.axis=0.6)
+abline(v = decimal_date(a), col='grey', lwd=0.5)
+
+
+
