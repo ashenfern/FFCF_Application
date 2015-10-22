@@ -136,7 +136,7 @@ namespace TestConsole
             MethodManipulation(engine, method);
             engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
 
-            plot(engine);
+            Plot(engine);
 
             //var a = engine.Evaluate("fcast <- forecast(tsValue, h=5)").AsCharacter();
             NumericVector forecasts = engine.Evaluate("fcast$mean").AsNumeric();
@@ -149,7 +149,7 @@ namespace TestConsole
             engine.Dispose();
         }
 
-        public static void plot(REngine engine)
+        public static void Plot(REngine engine)
         {
             engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Documents\\RFiles\\Images\\Test2.png')");
             engine.Evaluate("plot(fcast)");
@@ -171,8 +171,14 @@ namespace TestConsole
                 var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
                 values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
             }
+            else if (data == Enums.Data.Day)
+            {
+                var list = db.sp_Forecast_GetProductCountDayByProductId(productId).ToList();
+                values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
+            }
           
             return values;
         }
+
     }
 }
