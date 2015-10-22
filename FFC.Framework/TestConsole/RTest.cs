@@ -108,13 +108,14 @@ namespace TestConsole
         public static void Test()
         {
             int productId = 1;
-            string method = "HoltWinters"; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
-            int periods = 30;
+            Enums.Methods method = Enums.Methods.rwf; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
+            Enums.Data dataType = Enums.Data.Daily;
+            int periods = 50;
 
-            FFCEntities db = new FFCEntities();
-            var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
-
-            List<double> values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
+            var values = GetCorrespondingData(dataType, productId);
+            //FFCEntities db = new FFCEntities();
+            //var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
+            //List<double> values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
 
             REngine.SetEnvironmentVariables();
 
@@ -129,9 +130,10 @@ namespace TestConsole
             engine.SetSymbol("testTs", testTs);
 
             //auto arima for monthly
-            engine.Evaluate("tsValue <- ts(testTs, frequency=3, start=c(2010, 1, 1))");
+            engine.Evaluate("tsValue <- ts(testTs, frequency=1, start=c(2010, 1, 1))");
             engine.Evaluate("library(forecast)");
-            engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method)); // Fit <- Arima(tsValue)
+            //engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method)); // Fit <- Arima(tsValue)
+            MethodManipulation(engine, method);
             engine.Evaluate(String.Format("fcast <- forecast(Fit, h={0})", periods));
 
             plot(engine);
@@ -152,6 +154,25 @@ namespace TestConsole
             engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Documents\\RFiles\\Images\\Test2.png')");
             engine.Evaluate("plot(fcast)");
             engine.Evaluate("dev.off()");
+        }
+
+        public static void MethodManipulation(REngine engine, Enums.Methods method)
+        {
+            engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
+        }
+
+        public static List<double> GetCorrespondingData(Enums.Data data, int productId)
+        {
+            FFCEntities db = new FFCEntities();
+            List<double> values  = new List<double>();
+
+            if (data == Enums.Data.Daily)
+            {
+                var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
+                values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
+            }
+          
+            return values;
         }
     }
 }

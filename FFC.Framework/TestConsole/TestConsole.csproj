@@ -78,6 +78,7 @@
     <Compile Include="Employee.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="FFC.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

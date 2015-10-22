@@ -10,10 +10,11 @@ namespace TestConsole
     {
         public static FFCEntities context = new FFCEntities();
         public static Random random = new Random();
+        
         static void Main(string[] args)
         {
             //AddTestDataInvoke();
-            RTest.TestMethod2();
+            RTest.Test();
             
             Console.ReadLine();
         }
