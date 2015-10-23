@@ -23,6 +23,12 @@ namespace FFC.Framework.WebServices
             );
 
             config.Routes.MapHttpRoute(
+              name: "ApiByActionId",
+              routeTemplate: "api/{controller}/{action}/{id}",
+              defaults: new { id = RouteParameter.Optional }
+          );
+
+            config.Routes.MapHttpRoute(
               name: "ApiByAction",
               routeTemplate: "api/{controller}/{action}/{day}/{productId}/{start}/{end}",
               defaults: new { id = RouteParameter.Optional }

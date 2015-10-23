@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{631F23
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFC.Framework.Common", "FFC.Framework.Common\FFC.Framework.Common.csproj", "{9FC61B23-2FE2-4791-AEF1-0E504E75C0C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05FF75D7-F0D4-4E18-A5EE-B4796280F7A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FC61B23-2FE2-4791-AEF1-0E504E75C0C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FC61B23-2FE2-4791-AEF1-0E504E75C0C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FC61B23-2FE2-4791-AEF1-0E504E75C0C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FC61B23-2FE2-4791-AEF1-0E504E75C0C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

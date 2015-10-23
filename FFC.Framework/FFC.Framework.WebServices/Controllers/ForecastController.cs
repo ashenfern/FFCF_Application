@@ -17,6 +17,7 @@ namespace FFC.Framework.WebServices.Controllers
     {
         private FFCEntities db = new FFCEntities();
         private ForecastManager fm = new ForecastManager();
+        //private RManager rm = new RManager();
 
         // GET 
         //[Route("Forecast/{customerId}/orders/{orderId}")]
@@ -26,105 +27,112 @@ namespace FFC.Framework.WebServices.Controllers
             var result = fm.GetDailyTimeSpecificAvereageProductTransactions().Where( r => r.Day == day).ToList();
             return result;
         }
-        
-        ////Products
-        
-        // GET api/Forecast
-        public IQueryable<Product> GetProducts()
+
+        [ActionName("TestForecast")]
+        [System.Web.Http.HttpGet]
+        public ForecastResult ForecastTest(int id)
         {
-            return db.Products;
+            var result = RManager.Fcast1();
+            return result;
         }
 
-        // GET api/Forecast/5
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult GetProduct(int id)
-        {
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(product);
-        }
+        //    // GET api/Forecast
+        //public IQueryable<Product> GetProducts()
+        //{
+        //    return db.Products;
+        //}
 
-        // PUT api/Forecast/5
-        public IHttpActionResult PutProduct(int id, Product product)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //                // GET api/Forecast/5
+        //[ResponseType(typeof(Product))]
+        //public IHttpActionResult GetProduct(int id)
+        //{
+        //    Product product = db.Products.Find(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            if (id != product.ProductID)
-            {
-                return BadRequest();
-            }
+        //    return Ok(product);
+        //}
 
-            db.Entry(product).State = EntityState.Modified;
+        //// PUT api/Forecast/5
+        //public IHttpActionResult PutProduct(int id, Product product)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    if (id != product.ProductID)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    db.Entry(product).State = EntityState.Modified;
 
-        // POST api/Forecast
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult PostProduct(Product product)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!ProductExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            db.Products.Add(product);
-            db.SaveChanges();
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductID }, product);
-        }
+        //// POST api/Forecast
+        //[ResponseType(typeof(Product))]
+        //public IHttpActionResult PostProduct(Product product)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-        // DELETE api/Forecast/5
-        [ResponseType(typeof(Product))]
-        public IHttpActionResult DeleteProduct(int id)
-        {
-            Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+        //    db.Products.Add(product);
+        //    db.SaveChanges();
 
-            db.Products.Remove(product);
-            db.SaveChanges();
+        //    return CreatedAtRoute("DefaultApi", new { id = product.ProductID }, product);
+        //}
 
-            return Ok(product);
-        }
+        //// DELETE api/Forecast/5
+        //[ResponseType(typeof(Product))]
+        //public IHttpActionResult DeleteProduct(int id)
+        //{
+        //    Product product = db.Products.Find(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //    db.Products.Remove(product);
+        //    db.SaveChanges();
 
-        private bool ProductExists(int id)
-        {
-            return db.Products.Count(e => e.ProductID == id) > 0;
-        }
+        //    return Ok(product);
+        //}
+
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
+
+        //private bool ProductExists(int id)
+        //{
+        //    return db.Products.Count(e => e.ProductID == id) > 0;
+        //}
     }
 }

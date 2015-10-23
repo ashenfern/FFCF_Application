@@ -81,6 +81,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FFC.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ForecastResult.cs" />
+    <Compile Include="ForecastSearchCriteria.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>FFC.tt</DependentUpon>
     </Compile>
@@ -138,6 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FFC.Framework.Common\FFC.Framework.Common.csproj">
+      <Project>{9fc61b23-2fe2-4791-aef1-0e504e75c0c7}</Project>
+      <Name>FFC.Framework.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
