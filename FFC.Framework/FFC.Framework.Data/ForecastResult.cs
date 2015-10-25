@@ -9,7 +9,7 @@ namespace FFC.Framework.Data
 {
     public class ForecastResult
     {
-        public Enums.Methods Method { get; set; }
+        public Methods Method { get; set; }
         public List<double> results { get; set; }
     }
 }

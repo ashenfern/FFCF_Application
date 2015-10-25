@@ -6,25 +6,22 @@ using System.Threading.Tasks;
 
 namespace FFC.Framework.Common
 {
-    public class Enums
+    public enum Methods
     {
-        public enum Methods
-        {
-            meanf, //Mean
-            rwf,   //Naive
-            MovingAverage, //Moving Average
-            ets,
-            HoltWinters,
-            Arima
-        }
+        meanf, //Mean
+        rwf,   //Naive
+        MovingAverage, //Moving Average
+        ets,
+        HoltWinters,
+        Arima
+    }
 
-        public enum Data
-        {
-            Daily,          //Every day
-            Day,            //All given day (sunday data)
-            MonthDay,       //All Month day (April sunday)
-            MonthWeedDay,   //All Month Weed day (April 1st Week monday)
-            MonthDate,      //All month date data (April 8th)
-        }
+    public enum DataPeriod
+    {
+        Daily,          //Every day
+        Day,            //All given day (sunday data)
+        MonthDay,       //All Month day (April sunday)
+        MonthWeedDay,   //All Month Weed day (April 1st Week monday)
+        MonthDate,      //All month date data (April 8th)
     }
 }

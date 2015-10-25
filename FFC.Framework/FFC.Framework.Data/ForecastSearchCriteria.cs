@@ -10,8 +10,8 @@ namespace FFC.Framework.Data
     public class ForecastSearchCriteria
     {
         public DateTime StartDate { get; set; }
-        public Enums.Methods Method { get; set; }
-        public Enums.Data dataPeriod { get; set; }
+        public Methods Method { get; set; }
+        public DataPeriod dataPeriod { get; set; }
         public int period { get; set; }
     }
 }

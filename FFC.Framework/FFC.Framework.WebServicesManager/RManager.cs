@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FFC.Framework.Common;
+using System.IO;
 
 namespace FFC.Framework.WebServicesManager
 {
@@ -18,8 +19,8 @@ namespace FFC.Framework.WebServicesManager
             ForecastResult fcastResult = new ForecastResult();
 
             int productId = 1;
-            Enums.Methods method = Enums.Methods.rwf; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
-            Enums.Data dataType = Enums.Data.Daily;
+            Methods method = Methods.rwf; //meanf(YYMMDD,MMDD,MMWWDD,DD), rtw, rtw(with Drift), Moving AVG,ets, Arima, HoltWinters, msts
+            DataPeriod dataType = DataPeriod.Daily;
             int periods = 50;
 
             var values = GetCorrespondingData(dataType, productId);
@@ -27,10 +28,15 @@ namespace FFC.Framework.WebServicesManager
             //var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
             //List<double> values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
             //REngine.SetEnvironmentVariables(@"C:\Program Files\R\R-2.13.1\bin\i386");
-            REngine.SetEnvironmentVariables();
 
+            //SetupPath();
+            //Log();
+            REngine.SetEnvironmentVariables();
+            
             // There are several options to initialize the engine, but by default the following suffice:
             REngine engine = REngine.GetInstance();
+
+            engine.Initialize();
 
             // .NET Framework array to R vector.
             //NumericVector testTs = engine.CreateNumericVector(new double[] { 30.02, 29.99, 30.11, 29.97, 30.01, 29.99, 1000 });
@@ -63,29 +69,45 @@ namespace FFC.Framework.WebServicesManager
             return fcastResult;
         }
 
+
+        public static void SetupPath(string Rversion = "R-3.2.2")
+        {
+            var oldPath = System.Environment.GetEnvironmentVariable("PATH");
+            var rPath = System.Environment.Is64BitProcess ?
+                                   string.Format(@"C:\Program Files\R\{0}\bin\x64", Rversion) :
+                                   string.Format(@"C:\Program Files\R\{0}\bin\i386", Rversion);
+
+            if (!Directory.Exists(rPath))
+                throw new DirectoryNotFoundException(
+                  string.Format(" R.dll not found in : {0}", rPath));
+            var newPath = string.Format("{0}{1}{2}", rPath,
+                                         System.IO.Path.PathSeparator, oldPath);
+            System.Environment.SetEnvironmentVariable("PATH", newPath);
+        }
+
         public static void Plot(REngine engine)
         {
-            engine.Evaluate(@"png(filename='C:\\Users\\ashfernando\\Documents\\RFiles\\Images\\Test2.png')");
+            engine.Evaluate(@"png(filename='C:\\Users\\ashen\\Desktop\\Images\\Test2.png')");
             engine.Evaluate("plot(fcast)");
             engine.Evaluate("dev.off()");
         }
 
-        public static void MethodManipulation(REngine engine, Enums.Methods method)
+        public static void MethodManipulation(REngine engine, Methods method)
         {
             engine.Evaluate(String.Format("Fit <- {0}(tsValue)", method.ToString())); // Fit <- Arima(tsValue)
         }
 
-        public static List<double> GetCorrespondingData(Enums.Data data, int productId)
+        public static List<double> GetCorrespondingData(DataPeriod data, int productId)
         {
             FFCEntities db = new FFCEntities();
             List<double> values = new List<double>();
 
-            if (data == Enums.Data.Daily)
+            if (data == DataPeriod.Daily)
             {
                 var list = db.sp_Forecast_GetProductCountYearDayByProductId(productId).ToList();
                 values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
             }
-            else if (data == Enums.Data.Day)
+            else if (data == DataPeriod.Day)
             {
                 var list = db.sp_Forecast_GetProductCountDayByProductId(productId).ToList();
                 values = list.Select(r => Double.Parse(r.Count.ToString())).ToList();
