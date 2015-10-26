@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FFC.Framework.Common\FFC.Framework.Common.csproj">
-      <Project>{9fc61b23-2fe2-4791-aef1-0e504e75c0c7}</Project>
+      <Project>{e69451c2-18b3-44bc-b740-897624ea5e2b}</Project>
       <Name>FFC.Framework.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\FFC.Framework.Data\FFC.Framework.Data.csproj">

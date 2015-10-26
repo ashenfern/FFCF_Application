@@ -15,7 +15,6 @@ namespace FFC.Framework.Common
         HoltWinters,
         Arima
     }
-
     public enum DataPeriod
     {
         Daily,          //Every day
